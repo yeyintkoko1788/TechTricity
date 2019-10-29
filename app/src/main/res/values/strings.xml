@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">TechTricity</string>
+    <string name="news">News</string>
+
+    <string name="photo_potrait_ratio">H,3:2</string>
+    <string name="about_us_subtitle">Techtricity is the revolutionary digital media platform which aim to create a place where people can learn all the information they need to keep up with the ever-advancing world of technology.</string>
+    <string name="techtricity_will_provide">Techtricity will provide :</string>
+    <string name="provide_1">News and articles about latest smartphones, computers, computer games, mobile games, tech gadgets and science facts</string>
+    <string name="provide_2">Honest reviews on latest smartphones, computers and other technological products</string>
+    <string name="provide_3">Biographies, Ideologies and Beliefs of the famous icons of technology and science</string>
+    <string name="provide_4">Historical Events that change the face of technology as we know of today</string>
+    <string name="dot">•</string>
+    <string name="advertise_with_us">Advertise with Us</string>
+    <string name="ads_subtitle">Engage future customers while they are participating in professional development and receptive to learn about new products and service solutions. Techtricity has the reach to get your message in front of prospects whether they are conducting research on the web or following the news on social networks.</string>
+    <string name="our_services">OUR SERVICES</string>
+    <string name="our_service_subtitle"><![CDATA[We will provide effective management & We develop strategies by tracking and analysing the data]]></string>
+    <string name="video_presentation_subtitle">We create marvellous videos compelling the audience by promoting your brand and speeding up the sales</string>
+    <string name="content_creation_subtitle">We design effective content plans and work with professional content creators</string>
+    <string name="content_promotion_subtitle">Custom-created contents will be displayed to a massive crowd of right viewers</string>
+    <string name="innovatiove_ads_subtitle">Value of your products and services will be easily visible on website\'s banners and video advertisments</string>
+    <string name="video_presentation">VIDEO\nPRESENTATION</string>
+    <string name="content_promotion">CONTENT\nPROMOTION</string>
+    <string name="content_creation">CONTENT\nCREATION</string>
+    <string name="innovative_ads">INNOVATIVE\nADS</string>
+    <string name="contact_us">CONTACT US</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_phone_number">Enter Your Phone</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="enter_your_subject">Enter Your Subject</string>
+    <string name="enter_your_message">Enter Your Message</string>
+    <string name="popular_articles">Popular Articles</string>
+    <string name="features">Features</string>
+    <string name="recent_articles">Recent Articles</string>
+    <string name="how_to">How To</string>
+    <string name="loading">Loading...</string>
+    <string name="detail_transition_name" translatable="false">ST-Detail-Image</string>
+    <string name="join_us">JOIN US</string>
+    <string name="news_feed">News Feed</string>
+    <string name="category">Category</string>
+    <string name="author">Author</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us_menu">Contact Us</string>
+    <string name="share">Share</string>
+</resources>

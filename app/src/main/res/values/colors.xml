@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1E1E28</color>
+    <color name="colorPrimaryDark">#282837</color>
+    <color name="colorAccent">#DB5557</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrayBackground">#f2f2f2</color>
+    <color name="colorTextColorPrimary">#3C3C3C</color>
+    <color name="colorTextColorSecondary">#444A5C</color>
+    <color name="colorTextLightGrey">#989AA2</color>
+    <color name="colorDefaultBgColor">#fafafa</color>
+    <color name="color_grey_stroke">#d4d3d3</color>
+    <color name="color_grey_stroke_dark">#bcbbbb</color>
+    <color name="color_edt_grey">#eeeeee</color>
+    <color name="color_edt_grey_dark">#dddddd</color>
+    <color name="color_white_press">#bcbbbb</color>
+    <color name="color_border">#dedede</color>
+    <color name="color_green_text">#81cd50</color>
+    <color name="color_success">#68c934</color>
+    <color name="color_danger">#ce6565</color>
+    <color name="color_danger_dark">#af4d4d</color>
+    <color name="color_black_trans">#4D000000</color>
+    <color name="color_blue">#0548b3</color>
+    <color name="color_white_trans">#F2ffffff</color>
+    <color name="color_noti_background">#F4F4F4</color>
+    <color name="color_switch">#80707070</color>
+    <color name="placeholder_bg">#dddddd</color>
+
+    <color name="colorLightBlack">#3C4152</color>
+    <color name="colorDarkBlue">#3B5998</color>
+    <color name="colorViolet">#9b59b6</color>
+    <color name="colorGold">#FFAA00</color>
+
+    <color name="colorRecyclerBgLight">#F0F6F8</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorBlackTransparent">#80000000</color>
+    <color name="colorView">#DDDDDD</color>
+    <color name="btn_navigation_unselected">#AFAFAF</color>
+    <color name="btn_navigation_selected">#444A5C</color>
+    <color name="color_red_light">#80FE9494</color>
+    <color name="color_red">#FF0000</color>
+    <color name="color_grey_transparent">#80bcbbbb</color>
+    <color name="colorPlaceholder">#110F53</color>
+    <color name="colorConfirm">#81AD20</color>
+    <color name="deliver">#EDA934</color>
+    <color name="cancel">#EC482B</color>
+
+    <color name="colorG1">#88AFD6</color>
+    <color name="colorG2">#7EC9CB</color>
+    <color name="colorG3">#E19DBD</color>
+
+    <color name="colorAds">#ED5354</color>
+    <color name="colorPromotion">#1B2C61</color>
+    <color name="colorInnovative">#FD942F</color>
+    <color name="greenTransparent">#80EDBB99</color>
+    <color name="colorShare">#2ECC71</color>
+</resources>

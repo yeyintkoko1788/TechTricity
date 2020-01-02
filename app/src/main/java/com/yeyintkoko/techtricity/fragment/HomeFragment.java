@@ -289,7 +289,7 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     private void getRumors() {
         rumorsAdapter.clear();
         rumorsAdapter.showLoading();
-        callRumors = service.getArticleByCategory(10,1,"Gamings", "");
+        callRumors = service.getArticleByCategory(10,1,"Rumors", "");
         callRumors.enqueue(new Callback<ArticleReturnModel>() {
             @Override
             public void onResponse(Call<ArticleReturnModel> call, Response<ArticleReturnModel> response) {
@@ -546,7 +546,7 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     }
 
     private void getHowTo(){
-        callHowTo = service.getArticleByCategory(10,1,"Reviews","");
+        callHowTo = service.getArticleByCategory(10,1,"HowTo","");
         callHowTo.enqueue(new Callback<ArticleReturnModel>() {
             @Override
             public void onResponse(Call<ArticleReturnModel> call, Response<ArticleReturnModel> response) {

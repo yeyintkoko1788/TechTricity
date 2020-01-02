@@ -148,6 +148,22 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
     }
 
     private void sendMessage() {
+        if (etName.getMyanmarText().isEmpty()){
+            etName.setError(getResources().getString(R.string.error_msg));
+            return;
+        }else if (etPhone.getMyanmarText().isEmpty()){
+            etPhone.setError(getResources().getString(R.string.error_msg));
+            return;
+        }else if (etEmail.getMyanmarText().isEmpty()){
+            etEmail.setError(getResources().getString(R.string.error_msg));
+            return;
+        }else if (etSubject.getMyanmarText().isEmpty()){
+            etSubject.setError(getResources().getString(R.string.error_msg));
+            return;
+        }else if (etMessage.getMyanmarText().isEmpty()){
+            etMessage.setError(getResources().getString(R.string.error_msg));
+            return;
+        }
         progressDialog.showDialog();
         MessageModel messageModel = new MessageModel();
         messageModel.setID(0);

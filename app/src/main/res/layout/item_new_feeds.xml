@@ -76,11 +76,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/txt_size_large"
-                    android:layout_weight="9"
+                    android:layout_weight="10"
                     android:textColor="@color/colorTextColorPrimary"/>
                 <ImageView
                     android:id="@+id/iv_share"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:foreground="?attr/selectableItemBackground"
                     android:layout_height="25dp"
                     android:src="@drawable/ic_share"

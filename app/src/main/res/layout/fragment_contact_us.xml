@@ -159,7 +159,7 @@
                     android:layout_height="@dimen/potrait_small_height"
                     android:layout_margin="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:src="@drawable/ic_contact_us_logo"/>
+                    android:src="@drawable/contact_us_mimeo"/>
                 <com.yeyintkoko.techtricity.custom_control.MyanEditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"

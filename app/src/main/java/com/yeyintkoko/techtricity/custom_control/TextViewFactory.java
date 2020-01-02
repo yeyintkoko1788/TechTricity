@@ -37,13 +37,15 @@ public class TextViewFactory implements  ViewSwitcher.ViewFactory {
                 textView.setGravity(Gravity.CENTER);
             }
             if (ellopise){
-                textView.setMaxLines(2);
+                textView.setMaxLines(3);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
             }
             if (textAlignment.equals("end")){
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             }
-
+            if (textAlignment.equals("center")){
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 textView.setTextAppearance(context, styleId);
             } else {
@@ -63,6 +65,9 @@ public class TextViewFactory implements  ViewSwitcher.ViewFactory {
 
             if (textAlignment.equals("end")){
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            }
+            if (textAlignment.equals("center")){
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             }
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                 textView.setTextAppearance(context, styleId);

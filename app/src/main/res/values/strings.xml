@@ -3,6 +3,7 @@
     <string name="news">News</string>
 
     <string name="photo_potrait_ratio">H,3:2</string>
+    <string name="header_image_ration">H,10:5</string>
     <string name="about_us_subtitle">Techtricity is the revolutionary digital media platform which aim to create a place where people can learn all the information they need to keep up with the ever-advancing world of technology.</string>
     <string name="techtricity_will_provide">Techtricity will provide :</string>
     <string name="provide_1">News and articles about latest smartphones, computers, computer games, mobile games, tech gadgets and science facts</string>
@@ -41,4 +42,13 @@
     <string name="about_us">About Us</string>
     <string name="contact_us_menu">Contact Us</string>
     <string name="share">Share</string>
+    <string name="references">References</string>
+    <string name="assigned_tags">Assigned Tags</string>
+    <string name="read_more">Read More</string>
+    <string name="reviews">Reviews</string>
+    <string name="gaming">Gaming</string>
+    <string name="rumors">Rumors</string>
+    <string name="see_all">See All >></string>
+    <string name="author_detail">Author Detail</string>
+    <string name="related_articles">Related Articles</string>
 </resources>

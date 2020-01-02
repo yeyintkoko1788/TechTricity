@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:paddingStart="@dimen/margin_small"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_news"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/potrait_small_width"
+        android:src="@drawable/placeholder"
+        android:scaleType="centerCrop"/>
+    <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_title"
+        android:maxLines="2"
+        android:textColor="@color/colorWhite"
+        android:ellipsize="end"
+        android:textSize="@dimen/txt_size_normal"
+        android:layout_marginTop="@dimen/margin_small"/>
+</LinearLayout>

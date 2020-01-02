@@ -81,7 +81,7 @@ public class MyanTitleTextView extends AppCompatTextView {
         if (sharePreferenceHelper.getLocaleLanguage().equals(AppConstant.myanmarLanguageCode)){
             customFont = FontCache.getTypeface("Padauk_Book.ttf", context);
         }else {
-            customFont = FontCache.getTypeface("Geomanist_Book.ttf", context);
+            customFont = FontCache.getTypeface("effloresce_it.ttf", context);
         }
         setTypeface(customFont);
     }

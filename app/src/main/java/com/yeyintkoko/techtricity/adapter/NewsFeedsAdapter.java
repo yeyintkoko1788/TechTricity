@@ -48,12 +48,9 @@ import butterknife.ButterKnife;
 public class NewsFeedsAdapter extends BaseAdapter {
 
     private NewsFeedInterface listener;
-    private int lastPosition = -1;
-    private Context context;
 
     public NewsFeedsAdapter(NewsFeedInterface listener, Context context){
         this.listener = listener;
-        this.context = context;
     }
 
     @Override
@@ -65,11 +62,11 @@ public class NewsFeedsAdapter extends BaseAdapter {
 
     @Override
     protected void onBindCustomViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position > lastPosition){
+        /*if (position > lastPosition){
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.up_from_bottom);
             holder.itemView.startAnimation(animation);
             lastPosition = position;
-        }
+        }*/
         ((NewsFeedsAdapter.ViewHolder) holder).bindPost((ArticleModel) getItemsList().get(position),position);
     }
 

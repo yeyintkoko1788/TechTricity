@@ -1,14 +1,19 @@
 package com.yeyintkoko.techtricity.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.yeyintkoko.techtricity.R;
@@ -32,6 +37,7 @@ public class MainActivity extends BaseActivity {
     public static final String FRAGMENT_AUTHOR = "author";
     public static final String FRAGMENT_ABOUT_US = "about_us";
     public static final String FRAGMENT_CONTACT_US = "contact_us";
+    private SearchView searchView;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -77,6 +83,51 @@ public class MainActivity extends BaseActivity {
         init();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        //return super.onCreateOptionsMenu(menu);
+        if(menu instanceof MenuBuilder){
+            MenuBuilder m = (MenuBuilder) menu;
+            //noinspection RestrictedApi
+            m.setOptionalIconsVisible(true);
+        }
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                //mAdapter.getFilter().filter(query);
+                getSearchList(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+                //mAdapter.getFilter().filter(query);
+//                name = query;
+//                getBookList();
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    private void getSearchList(String title){
+        startActivity(SearchResultActivity.getSearchDetailIntent(MainActivity.this, title));
+    }
+
     private void init(){
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -87,25 +138,31 @@ public class MainActivity extends BaseActivity {
         }
 
         Fragment fragment = null;
+        Fragment previousFragment = null;
 
         switch (menu) {
             case  FRAGMENT_NEWS:
+                //previousFragment = getCurrentTagFragment();
                 CURRENT_TAG = FRAGMENT_NEWS;
                 fragment = new NewsFeedFragment();
                 break;
             case FRAGMENT_HOME:
+                //previousFragment = getCurrentTagFragment();
                 CURRENT_TAG = FRAGMENT_HOME;
                 fragment = new HomeFragment();
                 break;
             case FRAGMENT_AUTHOR:
+                //previousFragment = getCurrentTagFragment();
                 CURRENT_TAG = FRAGMENT_AUTHOR;
                 fragment = new AuthorFragment();
                 break;
             case FRAGMENT_ABOUT_US:
+                //previousFragment = getCurrentTagFragment();
                 CURRENT_TAG = FRAGMENT_ABOUT_US;
                 fragment = new AboutUsFragment();
                 break;
             case FRAGMENT_CONTACT_US:
+                //previousFragment = getCurrentTagFragment();
                 CURRENT_TAG = FRAGMENT_CONTACT_US;
                 fragment = new ContactUsFragment();
                 break;
@@ -117,7 +174,36 @@ public class MainActivity extends BaseActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            fragmentTransaction.replace(R.id.fragment_container, fragment).commitAllowingStateLoss();
+           /* if (previousFragment != null){
+                fragmentTransaction.hide(previousFragment).show(fragment).commitAllowingStateLoss();
+            }else {
+                fragmentTransaction.show(fragment).commitAllowingStateLoss();
+            }*/
+           fragmentTransaction.replace(R.id.fragment_container,fragment).commitAllowingStateLoss();
         }
+    }
+    private Fragment getCurrentTagFragment(){
+        if (!CURRENT_TAG.equals("")){
+            Fragment fragment = null;
+            switch (CURRENT_TAG){
+                case  FRAGMENT_NEWS:
+                    fragment = new NewsFeedFragment();
+                    break;
+                case FRAGMENT_HOME:
+                    fragment = new HomeFragment();
+                    break;
+                case FRAGMENT_AUTHOR:
+                    fragment = new AuthorFragment();
+                    break;
+                case FRAGMENT_ABOUT_US:
+                    fragment = new AboutUsFragment();
+                    break;
+                case FRAGMENT_CONTACT_US:
+                    fragment = new ContactUsFragment();
+                    break;
+            }
+            return fragment;
+        }
+        return null;
     }
 }

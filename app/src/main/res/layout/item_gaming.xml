@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/cvItem"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/gaming_hight"
+    android:layout_marginStart="@dimen/margin_small"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@color/colorBlack"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_news"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/potrait_ex_small_height"
+            android:src="@drawable/placeholder"
+            android:scaleType="centerCrop"/>
+        <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_size_normal"
+            android:textColor="@color/colorWhite"
+            android:text="ggggggggglakgjejgao;ewihgoawjefkjeapfklajelfjaiflkajefiajoefhkaejfoaijefkajlkfjeijfaoeojfialkjakfjeljaoieflakjeflakjeoifjaklefjaieofwjfka"
+            android:layout_margin="@dimen/margin_normal"
+            android:maxLines="3"
+            android:ellipsize="end"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -5,7 +5,7 @@ advancedVersioning {
     nameOptions {
         versionMajor 0
         versionMinor 0
-        versionPatch 1
+        versionPatch 2
     }
     codeOptions {
         versionCodeType org.moallemi.gradle.internal.VersionCodeType.DATE
@@ -13,7 +13,7 @@ advancedVersioning {
     }
     outputOptions {
         renameOutput true
-        nameFormat 'BookStore-v${versionName}'
+        nameFormat 'Techtricity-v${versionName}'
     }
 }
 
@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api 'com.google.android.material:material:1.1.0-beta01'
+    api 'com.google.android.material:material:1.2.0-alpha03'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.android.volley:volley:1.1.1'
 
@@ -70,8 +70,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.github.florent37:glidepalette:2.1.2'
 
     // Room
@@ -96,4 +96,12 @@ dependencies {
     implementation 'com.github.teresaholfeld:Stories:1.1.4'
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
+
+    implementation 'com.nex3z:flow-layout:1.2.4'
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
+    implementation 'com.github.elevenetc:textsurface:0.9.1'
 }

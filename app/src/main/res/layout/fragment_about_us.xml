@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:textColor="@color/colorAds"
-            android:textSize="@dimen/txt_size_large"
+            android:textSize="@dimen/txt_size_ex_large"
             android:textAlignment="center"
             android:text="@string/advertise_with_us"/>
         <androidx.cardview.widget.CardView
@@ -174,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/txt_size_large"
+            android:textSize="@dimen/txt_size_ex_large"
             android:textAlignment="center"
             android:text="@string/our_services"/>
         <com.yeyintkoko.techtricity.custom_control.MyanTextView

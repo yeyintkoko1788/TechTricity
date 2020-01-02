@@ -4,5 +4,5 @@ import android.content.Intent;
 import android.widget.ImageView;
 
 public interface NewsFeedInterface {
-    public void performTransation(Intent intent, ImageView imageView);
+    void performTransation(Intent intent, ImageView imageView);
 }

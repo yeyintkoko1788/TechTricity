@@ -55,4 +55,9 @@
     <color name="colorInnovative">#FD942F</color>
     <color name="greenTransparent">#80EDBB99</color>
     <color name="colorShare">#2ECC71</color>
+    <color name="color_read_more">#0B5551</color>
+    <color name="color_article">#DD3750</color>
+    <color name="color_view_divider">#DDDDDD</color>
+    <color name="color_facebook">#3b5998</color>
+    <color name="colorWe">#08B7F9</color>
 </resources>

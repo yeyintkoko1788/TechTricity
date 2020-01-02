@@ -2,6 +2,7 @@ package com.yeyintkoko.techtricity.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.yeyintkoko.techtricity.R;
+import com.yeyintkoko.techtricity.activity.NewsDetailActivity;
 import com.yeyintkoko.techtricity.common.BaseAdapter;
 import com.yeyintkoko.techtricity.custom_control.MyanBoldTextView;
 import com.yeyintkoko.techtricity.custom_control.MyanTextView;
@@ -109,6 +111,10 @@ public class FeatureAdapter extends BaseAdapter {
                     .into(ivImage);
             tvBannerAuthor.setMyanmarText(articleModel.getUserName());
             tvBannerTitle.setMyanmarText(articleModel.getTitle());
+            cvItem.setOnClickListener(view -> {
+                Intent intent = NewsDetailActivity.getDetailIntent(context,articleModel.getID(),articleModel.getArticlePhotoUrl());
+                context.startActivity(intent);
+            });
         }
     }
 }

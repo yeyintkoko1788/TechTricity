@@ -80,7 +80,7 @@ public class MyanBoldTextView extends AppCompatTextView {
         if (sharePreferenceHelper.getLocaleLanguage().equals(AppConstant.myanmarLanguageCode)){
             customFont = FontCache.getTypeface("Padauk_Bold.ttf", context);
         }else {
-            customFont = FontCache.getTypeface("Geomanist_Medium.ttf", context);
+            customFont = FontCache.getTypeface("Pyidaungsu_Bold.ttf", context);
         }
         setTypeface(customFont);
     }

@@ -22,13 +22,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
 
-            <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_size_xx_large"
-                android:layout_margin="@dimen/margin_normal"
-                android:text="@string/news"
-                android:textColor="@color/colorWhite"/>
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:text="@string/news"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:padding="@dimen/margin_small"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvNews"
                 android:layout_width="match_parent"
@@ -73,26 +100,80 @@
                     android:layout_marginStart="@dimen/margin_normal"
                     android:layout_marginEnd="@dimen/margin_normal"/>
             </LinearLayout>
-            <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_size_xx_large"
-                android:layout_margin="@dimen/margin_normal"
-                android:text="@string/features"
-                android:textColor="@color/colorWhite"/>
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:text="@string/features"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_features"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:layout_gravity="end"
+                        android:padding="@dimen/margin_small"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
             <com.yarolegovich.discretescrollview.DiscreteScrollView
                 android:id="@+id/rv_feature"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:layout_marginBottom="@dimen/margin_normal"/>
-            <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_size_xx_large"
-                android:layout_margin="@dimen/margin_normal"
-                android:text="@string/how_to"
-                android:textColor="@color/colorWhite"/>
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:layout_marginBottom="@dimen/margin_normal"
+                    android:layout_weight="1"
+                    android:text="@string/how_to"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_how_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:padding="@dimen/margin_small"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_how_to"
                 app:cardCornerRadius="@dimen/card_corner_radius"
@@ -159,14 +240,36 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:textAlignment="textEnd"
-                                    android:layout_marginStart="@dimen/margin_normal"
                                     android:layout_marginEnd="@dimen/margin_normal"/>
                             </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/ll_read_more"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:layout_marginBottom="@dimen/margin_normal"
+                                android:orientation="horizontal">
+                                <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/read_more"
+                                    android:textSize="@dimen/txt_size_small"
+                                    android:textColor="@color/colorWhite"
+                                    android:layout_gravity="center_vertical"/>
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/ic_arrow_right"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="6dp"/>
+                            </LinearLayout>
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginBottom="34dp"
                             android:orientation="horizontal">
 
                             <View
@@ -195,5 +298,123 @@
 
 
             </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:text="@string/reviews"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:padding="@dimen/margin_small"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:text="@string/gaming"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_gaming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:padding="@dimen/margin_small"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_gaming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <com.yeyintkoko.techtricity.custom_control.MyanBoldTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/txt_size_xx_large"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:text="@string/rumors"
+                    android:textColor="@color/colorWhite"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:gravity="end"
+                    android:layout_weight="1">
+                    <com.yeyintkoko.techtricity.custom_control.MyanTextView
+                        android:id="@+id/tv_see_all_rumors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorWhite"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:padding="@dimen/margin_small"
+                        android:background="@drawable/round_transparent_bg"
+                        android:textSize="@dimen/txt_size_normal"
+                        android:text="@string/see_all"/>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_rumors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_normal" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

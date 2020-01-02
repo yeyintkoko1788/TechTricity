@@ -3,6 +3,7 @@ package com.yeyintkoko.techtricity.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,12 +13,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,16 +37,24 @@ import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 import com.yeyintkoko.techtricity.R;
+import com.yeyintkoko.techtricity.activity.NewsDetailActivity;
+import com.yeyintkoko.techtricity.activity.SeeAllActivity;
 import com.yeyintkoko.techtricity.adapter.BannerAdapter;
 import com.yeyintkoko.techtricity.adapter.FeatureAdapter;
+import com.yeyintkoko.techtricity.adapter.GamingAdapter;
 import com.yeyintkoko.techtricity.adapter.NewsAdapter;
+import com.yeyintkoko.techtricity.adapter.ReviewsAdapter;
+import com.yeyintkoko.techtricity.adapter.RumorsAdapter;
+import com.yeyintkoko.techtricity.common.ItemOffsetDecoration;
 import com.yeyintkoko.techtricity.custom_control.MyDateFormat;
+import com.yeyintkoko.techtricity.custom_control.MyanTextView;
 import com.yeyintkoko.techtricity.custom_control.TextViewFactory;
 import com.yeyintkoko.techtricity.helper.ServiceHelper;
 import com.yeyintkoko.techtricity.model.ArticleListModel;
 import com.yeyintkoko.techtricity.model.ArticleModel;
 import com.yeyintkoko.techtricity.model.ArticleReturnModel;
 import com.yeyintkoko.techtricity.model.BannerReturnModel;
+import com.yeyintkoko.techtricity.tech_tricity_interface.NewsFeedInterface;
 
 import java.util.ArrayList;
 
@@ -51,7 +65,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<FeatureAdapter.ViewHolder>, StoriesProgressView.StoriesListener, View.OnClickListener {
+public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<FeatureAdapter.ViewHolder>, NewsFeedInterface, StoriesProgressView.StoriesListener, View.OnClickListener {
 
     @BindView(R.id.rvBanner)
     RecyclerView rvBanner;
@@ -101,6 +115,36 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     @BindView(R.id.cv_how_to)
     CardView cvHowTo;
 
+    @BindView(R.id.ll_read_more)
+    LinearLayout llReadMore;
+
+    @BindView(R.id.rv_reviews)
+    RecyclerView rvReviews;
+
+    @BindView(R.id.rv_gaming)
+    RecyclerView rvGaming;
+
+    @BindView(R.id.rv_rumors)
+    RecyclerView rvRumors;
+
+    @BindView(R.id.tv_see_all_features)
+    MyanTextView tvSeeAllFeatures;
+
+    @BindView(R.id.tv_see_all_gaming)
+    MyanTextView tvSeeAllGaming;
+
+    @BindView(R.id.tv_see_all_how_to)
+    MyanTextView tvSeeAllHowTo;
+
+    @BindView(R.id.tv_see_all_news)
+    MyanTextView tvSeeAllNews;
+
+    @BindView(R.id.tv_see_all_reviews)
+    MyanTextView tvSeeAllReviews;
+
+    @BindView(R.id.tv_see_all_rumors)
+    MyanTextView tvSeeAllRumors;
+
     private static final int PROGRESS_COUNT = 5;
     private int counter = 0;
     private Context context;
@@ -109,14 +153,21 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     private Call<ArticleReturnModel> callNews;
     private Call<ArticleReturnModel> callFeature;
     private Call<ArticleReturnModel> callHowTo;
+    private Call<ArticleReturnModel> callReviews;
+    private Call<ArticleReturnModel> callGaming;
+    private Call<ArticleReturnModel> callRumors;
     private ServiceHelper.ApiService service;
     private BannerAdapter bannerAdapter;
     private NewsAdapter newsAdapter;
     private FeatureAdapter featureAdapter;
+    private ReviewsAdapter reviewsAdapter;
+    private GamingAdapter gamingAdapter;
+    private RumorsAdapter rumorsAdapter;
     private ArrayList<ArticleListModel> articleListModels;
     private ArrayList<ArticleListModel> featureArticleListModels;
     private ArrayList<ArticleListModel> howToListModels;
     private ArrayList<ArticleModel> models;
+    private ArrayList<ArticleListModel> rumoursModels;
     private int currentPosition;
     private MyDateFormat myDateFormat;
     private InfiniteScrollAdapter infiniteAdapter;
@@ -133,12 +184,16 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         init();
         return rootView;
     }
+
     private void init(){
         service = ServiceHelper.getClient(context);
         bannerAdapter = new BannerAdapter();
         newsAdapter = new NewsAdapter();
         featureAdapter = new FeatureAdapter();
+        reviewsAdapter = new ReviewsAdapter();
         myDateFormat = new MyDateFormat();
+        rumorsAdapter = new RumorsAdapter();
+        gamingAdapter = new GamingAdapter(true);
         StackLayoutManager.ScrollOrientation orientation = StackLayoutManager.ScrollOrientation.BOTTOM_TO_TOP;
         StackLayoutManager manager = new StackLayoutManager(orientation,4);
         manager.setItemOffset(20);
@@ -193,6 +248,32 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
 
         reverse.setOnClickListener(this);
         skip.setOnClickListener(this);
+
+        //reviews
+        rvReviews.setHasFixedSize(true);
+        rvReviews.addItemDecoration(new ItemOffsetDecoration(20));
+        rvReviews.setLayoutManager( new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+        rvReviews.setAdapter(reviewsAdapter);
+
+        //Gaming
+        rvGaming.setHasFixedSize(true);
+        rvGaming.addItemDecoration(new ItemOffsetDecoration(20));
+        rvGaming.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+        rvGaming.setAdapter(gamingAdapter);
+
+        //Rumors
+        rvRumors.setHasFixedSize(true);
+        rvGaming.addItemDecoration(new ItemOffsetDecoration(20));
+        rvRumors.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+        rvRumors.setAdapter(rumorsAdapter);
+
+        tvSeeAllFeatures.setOnClickListener(this);
+        tvSeeAllGaming.setOnClickListener(this);
+        tvSeeAllFeatures.setOnClickListener(this);
+        tvSeeAllHowTo.setOnClickListener(this);
+        tvSeeAllNews.setOnClickListener(this);
+        tvSeeAllReviews.setOnClickListener(this);
+        tvSeeAllRumors.setOnClickListener(this);
     }
 
     private void getData(){
@@ -200,6 +281,41 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         getNews();
         getFeatureNews();
         getHowTo();
+        getReviews();
+        getGaming();
+        getRumors();
+    }
+
+    private void getRumors() {
+        rumorsAdapter.clear();
+        rumorsAdapter.showLoading();
+        callRumors = service.getArticleByCategory(10,1,"Gamings", "");
+        callRumors.enqueue(new Callback<ArticleReturnModel>() {
+            @Override
+            public void onResponse(Call<ArticleReturnModel> call, Response<ArticleReturnModel> response) {
+                rumorsAdapter.clearFooter();
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        rumoursModels = response.body().getResults();
+                        for (ArticleListModel model : rumoursModels){
+                            rumorsAdapter.add(model.getArticle());
+                        }
+                    }
+                }else {
+                    handleFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArticleReturnModel> call, Throwable t) {
+                handleFailure();
+            }
+
+            private void handleFailure(){
+                rumorsAdapter.clearFooter();
+                rumorsAdapter.showRetry(R.layout.recycler_footer_retry, R.id.retry_container, () -> getReviews());
+            }
+        });
     }
 
     private void initSwitcher(){
@@ -288,6 +404,69 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                         getBanner();
                     }
                 });
+            }
+        });
+    }
+
+    private void getGaming(){
+        gamingAdapter.clear();
+        gamingAdapter.showLoading();
+        callGaming = service.getArticleByCategory(10,1,"Gamings", "");
+        callGaming.enqueue(new Callback<ArticleReturnModel>() {
+            @Override
+            public void onResponse(Call<ArticleReturnModel> call, Response<ArticleReturnModel> response) {
+                gamingAdapter.clearFooter();
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        ArrayList<ArticleListModel> reviewsList = response.body().getResults();
+                        for (ArticleListModel model : reviewsList){
+                            gamingAdapter.add(model.getArticle());
+                        }
+                    }
+                }else {
+                    handleFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArticleReturnModel> call, Throwable t) {
+                handleFailure();
+            }
+
+            private void handleFailure(){
+                gamingAdapter.clearFooter();
+                gamingAdapter.showRetry(R.layout.recycler_footer_retry, R.id.retry_container, () -> getReviews());
+            }
+        });
+    }
+
+    private void getReviews(){
+        reviewsAdapter.clear();
+        reviewsAdapter.showLoading();
+        callReviews = service.getArticleByCategory(10,1,"Reviews","");
+        callReviews.enqueue(new Callback<ArticleReturnModel>() {
+            @Override
+            public void onResponse(Call<ArticleReturnModel> call, Response<ArticleReturnModel> response) {
+                reviewsAdapter.clearFooter();
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        ArrayList<ArticleListModel> reviewsList = response.body().getResults();
+                        for (ArticleListModel model : reviewsList){
+                            reviewsAdapter.add(model.getArticle());
+                        }
+                    }
+                }else {
+                    handleFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArticleReturnModel> call, Throwable t) {
+                handleFailure();
+            }
+            private void handleFailure(){
+                reviewsAdapter.clearFooter();
+                reviewsAdapter.showRetry(R.layout.recycler_footer_retry, R.id.retry_container, () -> getReviews());
             }
         });
     }
@@ -535,6 +714,11 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         tsHowToTime.setInAnimation(context, animV[0]);
         tsHowToTime.setOutAnimation(context, animV[1]);
         tsHowToTime.setText(myDateFormat.getDate(myDateFormat.DATE_FORMAT_DD_MM_AAA,howToListModels.get(pos).getArticle().getCreatedTime()));
+
+        llReadMore.setOnClickListener(view -> {
+            Intent intent = NewsDetailActivity.getDetailIntent(context,howToListModels.get(pos).getArticle().getID(),howToListModels.get(pos).getArticle().getArticlePhotoUrl());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -547,6 +731,34 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
             case R.id.skip:
                 howTo.skip();
                 break;
+            case R.id.tv_see_all_features:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"Features"));
+                break;
+            case R.id.tv_see_all_gaming:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"Gaming"));
+                break;
+            case R.id.tv_see_all_how_to:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"HowTo"));
+                break;
+            case R.id.tv_see_all_news:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"News"));
+                break;
+            case R.id.tv_see_all_reviews:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"Reviews"));
+                break;
+            case R.id.tv_see_all_rumors:
+                startActivity(SeeAllActivity.getSeeAllIntent(context,"Rumors"));
+                break;
         }
+    }
+
+
+    @Override
+    public void performTransation(Intent intent, ImageView imageView) {
+        androidx.core.util.Pair pair = new Pair(imageView, context.getResources().getString(R.string.detail_transition_name));
+        //final Pair<ImageView, String> pair = Pair.create(imageView, activity.getString(R.string.detail_transition_name));
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), pair);
+        //final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, pair);
+        ActivityCompat.startActivity(context, intent, activityOptions.toBundle());
     }
 }

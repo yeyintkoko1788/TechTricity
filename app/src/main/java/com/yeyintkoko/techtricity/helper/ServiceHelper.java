@@ -2,13 +2,20 @@ package com.yeyintkoko.techtricity.helper;
 
 import android.content.Context;
 
+import com.yeyintkoko.techtricity.model.ArticleByAuthorModel;
+import com.yeyintkoko.techtricity.model.ArticleDetailModel;
 import com.yeyintkoko.techtricity.model.ArticleModel;
 import com.yeyintkoko.techtricity.model.ArticleReturnModel;
+import com.yeyintkoko.techtricity.model.AuthorListModel;
+import com.yeyintkoko.techtricity.model.AuthorModel;
+import com.yeyintkoko.techtricity.model.AuthorReturnModel;
 import com.yeyintkoko.techtricity.model.BannerReturnModel;
+import com.yeyintkoko.techtricity.model.MessageModel;
 import com.yeyintkoko.techtricity.model.RecentReturnModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import okhttp3.Cache;
@@ -18,7 +25,9 @@ import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 import static com.yeyintkoko.techtricity.helper.AppConstant.BASE_URL;
@@ -87,6 +96,24 @@ public class ServiceHelper {
         Call<RecentReturnModel> getRecentNews(@Query("pagesize") int pagesize, @Query("page") int page);
 
         @GET("api/android/articledetail")
-        Call<ArticleModel> getNewsDetail(@Query("ID") int id);
+        Call<ArticleDetailModel> getNewsDetail(@Query("ID") int id);
+
+        @GET("api/android/authorlist")
+        Call<AuthorReturnModel> getAuthorList();
+
+        @GET("api/android/authordetail")
+        Call<AuthorModel> getAuthorDetail(@Query("ID") int id);
+
+        @GET("api/android/relatedarticlebyauthor")
+        Call<ArticleByAuthorModel> getNewsByAuthor(@Query("ID") int id, @Query("page") int page, @Query("pagesize") int pageSize);
+
+        @POST("api/android/createmessage")
+        Call<MessageModel> sendMessage(@Body MessageModel model);
+
+        @GET("api/android/relatedarticlebymainarticle")
+        Call<ArrayList<ArticleModel>> getRelatedNews(@Query("ID") int id);
+
+        @GET("api/android/tagsarticlelist")
+        Call<ArticleByAuthorModel> getSearchArticles(@Query("page") int page, @Query("pagesize") int pageSize, @Query("search") String search);
     }
 }

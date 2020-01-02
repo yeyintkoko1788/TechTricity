@@ -3,6 +3,7 @@ package com.yeyintkoko.techtricity.adapter;
 import androidx.cardview.widget.CardView;
 
 import com.yeyintkoko.techtricity.model.ArticleModel;
+import com.yeyintkoko.techtricity.model.AuthorListModel;
 
 
 public interface CardAdapter {
@@ -13,7 +14,7 @@ public interface CardAdapter {
 
     CardView getCardViewAt(int position);
 
-    ArticleModel getItemAt(int position);
+    AuthorListModel getItemAt(int position);
 
     int getCount();
 }

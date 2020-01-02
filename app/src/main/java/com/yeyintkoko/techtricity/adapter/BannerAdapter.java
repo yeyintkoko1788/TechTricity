@@ -1,24 +1,29 @@
 package com.yeyintkoko.techtricity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.yeyintkoko.techtricity.R;
+import com.yeyintkoko.techtricity.activity.NewsDetailActivity;
 import com.yeyintkoko.techtricity.common.BaseAdapter;
 import com.yeyintkoko.techtricity.custom_control.MyanBoldTextView;
 import com.yeyintkoko.techtricity.custom_control.MyanTextView;
 import com.yeyintkoko.techtricity.model.ArticleModel;
+import com.yeyintkoko.techtricity.tech_tricity_interface.NewsFeedInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BannerAdapter extends BaseAdapter {
+
     @Override
     protected RecyclerView.ViewHolder onCreateCustomViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -52,6 +57,9 @@ public class BannerAdapter extends BaseAdapter {
         @BindView(R.id.tv_banner_title)
         MyanBoldTextView tvBannerTitle;
 
+        @BindView(R.id.item_news)
+        LinearLayout itemNews;
+
         private Context context;
 
         public ViewHolder(View itemView) {
@@ -67,6 +75,13 @@ public class BannerAdapter extends BaseAdapter {
                     .into(ivImage);
             tvBannerAuthor.setMyanmarText(articleModel.getUserName());
             tvBannerTitle.setMyanmarText(articleModel.getTitle());
+            itemNews.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = NewsDetailActivity.getDetailIntent(context,articleModel.getID(),articleModel.getArticlePhotoUrl());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

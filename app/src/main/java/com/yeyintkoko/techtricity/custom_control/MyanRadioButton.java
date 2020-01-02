@@ -50,7 +50,7 @@ public class MyanRadioButton extends AppCompatRadioButton {
         if (sharePreferenceHelper.getLocaleLanguage().equals(AppConstant.myanmarLanguageCode)){
             customFont = FontCache.getTypeface("Padauk_Regular.ttf", context);
         }else {
-            customFont = FontCache.getTypeface("Geomanist_Regular.ttf", context);
+            customFont = FontCache.getTypeface("Pyidaungsu_Regular.ttf", context);
         }
         setTypeface(customFont);
     }

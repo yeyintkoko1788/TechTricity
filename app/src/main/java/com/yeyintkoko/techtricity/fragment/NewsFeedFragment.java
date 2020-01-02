@@ -20,18 +20,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.yeyintkoko.techtricity.R;
-import com.yeyintkoko.techtricity.adapter.NewsAdapter;
+import com.yeyintkoko.techtricity.adapter.GamingAdapter;
 import com.yeyintkoko.techtricity.adapter.NewsFeedsAdapter;
-import com.yeyintkoko.techtricity.common.ItemOffsetDecoration;
 import com.yeyintkoko.techtricity.common.SmartScrollListener;
-import com.yeyintkoko.techtricity.custom_control.MyanTextView;
 import com.yeyintkoko.techtricity.helper.AppConstant;
 import com.yeyintkoko.techtricity.helper.ServiceHelper;
-import com.yeyintkoko.techtricity.model.ArticleListModel;
 import com.yeyintkoko.techtricity.model.ArticleModel;
-import com.yeyintkoko.techtricity.model.ArticleReturnModel;
 import com.yeyintkoko.techtricity.model.RecentReturnModel;
 import com.yeyintkoko.techtricity.tech_tricity_interface.NewsFeedInterface;
 
@@ -43,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
+public class NewsFeedFragment extends Fragment implements NewsFeedInterface, PullRefreshLayout.OnRefreshListener {
     private Context context;
 
     @BindView(R.id.shimmer_view_container)
@@ -54,6 +51,9 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
 
     @BindView(R.id.loading_shimmer)
     ShimmerFrameLayout loadingShimmer;
+
+    @BindView(R.id.swipeRefreshLayout)
+    PullRefreshLayout swipRefresh;
 
     private NewsFeedsAdapter newsFeedsAdapter;
     private Call<RecentReturnModel> callNews;
@@ -97,7 +97,7 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
                 callNews.enqueue(new Callback<RecentReturnModel>() {
                     @Override
                     public void onResponse(Call<RecentReturnModel> call, Response<RecentReturnModel> response) {
-                        loadingShimmer.stopShimmer();
+                        //loadingShimmer.hideShimmer();
                         loadingShimmer.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
@@ -124,6 +124,10 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
         rvNewsFeed.addOnScrollListener(smartScrollListener);
         rvNewsFeed.setAdapter(newsFeedsAdapter);
         getNewsFeed();
+
+        swipRefresh.setOnRefreshListener(this);
+        swipRefresh.setRefreshing(false);
+        swipRefresh.setRefreshStyle(PullRefreshLayout.STYLE_CIRCLES);
     }
 
     private void getNewsFeed(){
@@ -134,8 +138,8 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
         callNews.enqueue(new Callback<RecentReturnModel>() {
             @Override
             public void onResponse(Call<RecentReturnModel> call, Response<RecentReturnModel> response) {
-                shimmerView.stopShimmer();
-                shimmerView.hideShimmer();
+                //shimmerView.stopShimmer();
+                //shimmerView.hideShimmer();
                 shimmerView.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
@@ -162,8 +166,8 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
             }
 
             private void handleFailure(){
-                shimmerView.stopShimmer();
-                shimmerView.hideShimmer();
+                //shimmerView.stopShimmer();
+               // shimmerView.hideShimmer();
                 shimmerView.setVisibility(View.GONE);
                 newsFeedsAdapter.clearFooter();
                 newsFeedsAdapter.showRetry(R.layout.recycler_footer_retry, R.id.retry_container, new NewsFeedsAdapter.OnRetryListener(){
@@ -183,5 +187,10 @@ public class NewsFeedFragment extends Fragment implements NewsFeedInterface {
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), pair);
         //final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, pair);
         ActivityCompat.startActivity(context, intent, activityOptions.toBundle());
+    }
+
+    @Override
+    public void onRefresh() {
+        init();
     }
 }

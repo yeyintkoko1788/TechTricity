@@ -22,7 +22,7 @@
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_xlarge">32dp</dimen>
 
-    <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="card_elevation">3dp</dimen>
 
     <dimen name="margin_recycler">57dp</dimen>
@@ -36,4 +36,5 @@
 
     <dimen name="potrait_square_small"> 90dp</dimen>
     <dimen name="potrait_square_medium"> 180dp</dimen>
+    <dimen name="gaming_hight">210dp</dimen>
 </resources>

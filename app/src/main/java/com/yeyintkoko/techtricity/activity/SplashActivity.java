@@ -17,6 +17,9 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.splash_text)
     TextSurface splashText;
 
+    @BindView(R.id.iv_loading)
+    ImageView ivLoading;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_splash;
@@ -41,11 +44,15 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void doSplash() {
-        splashText.postDelayed(new Runnable() {
+        /*splashText.postDelayed(new Runnable() {
             @Override public void run() {
                 show();
             }
-        }, 1000);
+        }, 1000);*/
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.loading)
+                .into(ivLoading);
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -53,7 +60,7 @@ public class SplashActivity extends BaseActivity {
                 init();
             }
 
-        }, 5500);
+        }, 2000);
     }
     private void show(){
         splashText.reset();

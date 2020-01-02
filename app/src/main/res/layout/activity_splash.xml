@@ -28,11 +28,17 @@
                 android:layout_height="@dimen/potrait_small_height"
                 android:src="@drawable/ic_logo"
                 android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/iv_loading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/iv_logo"/>
             <su.levenetc.android.textsurface.TextSurface
                 android:id="@+id/splash_text"
                 android:layout_width="match_parent"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:layout_height="100dp"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:layout_below="@+id/iv_logo"/>
 

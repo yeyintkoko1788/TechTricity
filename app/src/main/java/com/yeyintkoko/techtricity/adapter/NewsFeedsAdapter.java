@@ -102,6 +102,9 @@ public class NewsFeedsAdapter extends BaseAdapter {
         @BindView(R.id.item_news)
         LinearLayout itemNews;
 
+        @BindView(R.id.iv_share)
+        ImageView ivShare;
+
         public ViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
@@ -151,12 +154,13 @@ public class NewsFeedsAdapter extends BaseAdapter {
                     .into(ivImage);
             //setAnimation(itemView, position);
 
-            itemNews.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = NewsDetailActivity.getDetailIntent(context,articleModel.getID(),articleModel.getArticlePhotoUrl());
-                    listener.performTransation(intent,ivImage);
-                }
+            itemNews.setOnClickListener(view -> {
+                Intent intent = NewsDetailActivity.getDetailIntent(context,articleModel.getID(),articleModel.getArticlePhotoUrl());
+                listener.performTransation(intent,ivImage);
+            });
+
+            ivShare.setOnClickListener(view -> {
+                openShareOption(context, "");
             });
         }
        /* private void setAnimation(View viewToAnimate, int position)
@@ -184,5 +188,15 @@ public class NewsFeedsAdapter extends BaseAdapter {
     public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
         holder.itemView.clearAnimation();
+    }
+
+    private void openShareOption(Context context, String fbShareLink){
+        Intent myIntent = new Intent(Intent.ACTION_SEND);
+        myIntent.setType("text/plain");
+        String shareBody = fbShareLink;
+        String shareSub = "TechTricity";
+        myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+        myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+        context.startActivity(Intent.createChooser(myIntent, "Share using"));
     }
 }

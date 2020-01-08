@@ -26,7 +26,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -34,9 +34,9 @@
 
                 <data
                     android:host="techtricitymm.com"
-                    android:path="/Article"
+                    android:path="/article"
                     android:scheme="http" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".activity.MainActivity"
@@ -51,6 +51,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.SearchResultActivity"
             android:screenOrientation="portrait"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c72e32147d896001cc721dbfc74840c46d69ea6a" />
     </application>
 
 </manifest>

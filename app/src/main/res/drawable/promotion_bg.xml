@@ -5,7 +5,7 @@
     <item>
         <shape>
             <solid
-                android:color="@color/colorPromotion"/>
+                android:color="@color/color_content_promotion"/>
             <corners
                 android:radius="10dp"/>
         </shape>

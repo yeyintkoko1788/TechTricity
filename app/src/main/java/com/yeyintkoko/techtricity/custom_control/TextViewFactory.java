@@ -37,7 +37,7 @@ public class TextViewFactory implements  ViewSwitcher.ViewFactory {
                 textView.setGravity(Gravity.CENTER);
             }
             if (ellopise){
-                textView.setMaxLines(3);
+                textView.setMaxLines(2);
                 textView.setEllipsize(TextUtils.TruncateAt.END);
             }
             if (textAlignment.equals("end")){

@@ -60,4 +60,8 @@
     <color name="color_view_divider">#DDDDDD</color>
     <color name="color_facebook">#3b5998</color>
     <color name="colorWe">#08B7F9</color>
+    <color name="color_video_creation">#FF416C</color>
+    <color name="color_content_cration">#00C9A7</color>
+    <color name="color_content_promotion">#2196F3</color>
+    <color name="color_innovative_ads">#FFB822</color>
 </resources>

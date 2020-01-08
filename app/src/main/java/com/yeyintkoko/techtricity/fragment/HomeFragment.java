@@ -145,6 +145,24 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     @BindView(R.id.tv_see_all_rumors)
     MyanTextView tvSeeAllRumors;
 
+    @BindView(R.id.ll_news)
+    LinearLayout llNews;
+
+    @BindView(R.id.ll_features)
+    LinearLayout llFeatures;
+
+    @BindView(R.id.ll_how_to)
+    LinearLayout llHowTo;
+
+    @BindView(R.id.ll_reviews)
+    LinearLayout llReviews;
+
+    @BindView(R.id.ll_gaming)
+    LinearLayout llGaming;
+
+    @BindView(R.id.ll_rumors)
+    LinearLayout llRumors;
+
     private static final int PROGRESS_COUNT = 5;
     private int counter = 0;
     private Context context;
@@ -232,6 +250,7 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         int cardsGap = (int) convertDpToPx(context,12f);
         layoutManger = new CardSliderLayoutManager(marginStart, (int)(width/1.3), cardsGap);
         rvNews.setLayoutManager(layoutManger);
+        new CardSnapHelper().attachToRecyclerView(rvNews);
 
         //feature news
         rvFeature.setHasFixedSize(true);
@@ -241,8 +260,6 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         rvFeature.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.8f)
                 .build());
-
-        new CardSnapHelper().attachToRecyclerView(rvNews);
 
         getData();
 
@@ -297,9 +314,15 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()){
                     if (response.body() != null){
                         rumoursModels = response.body().getResults();
-                        for (ArticleListModel model : rumoursModels){
-                            rumorsAdapter.add(model.getArticle());
+                        if (rumoursModels.size() > 0){
+                            llRumors.setVisibility(View.VISIBLE);
+                            for (ArticleListModel model : rumoursModels){
+                                rumorsAdapter.add(model.getArticle());
+                            }
+                        }else {
+                            llRumors.setVisibility(View.GONE);
                         }
+
                     }
                 }else {
                     handleFailure();
@@ -419,9 +442,15 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()){
                     if (response.body() != null){
                         ArrayList<ArticleListModel> reviewsList = response.body().getResults();
-                        for (ArticleListModel model : reviewsList){
-                            gamingAdapter.add(model.getArticle());
+                        if (reviewsList.size() > 0){
+                            llGaming.setVisibility(View.VISIBLE);
+                            for (ArticleListModel model : reviewsList){
+                                gamingAdapter.add(model.getArticle());
+                            }
+                        }else {
+                            llGaming.setVisibility(View.GONE);
                         }
+
                     }
                 }else {
                     handleFailure();
@@ -451,8 +480,13 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()){
                     if (response.body() != null){
                         ArrayList<ArticleListModel> reviewsList = response.body().getResults();
-                        for (ArticleListModel model : reviewsList){
-                            reviewsAdapter.add(model.getArticle());
+                        if (reviewsList.size() > 0){
+                            llReviews.setVisibility(View.VISIBLE);
+                            for (ArticleListModel model : reviewsList){
+                                reviewsAdapter.add(model.getArticle());
+                            }
+                        }else {
+                            llReviews.setVisibility(View.GONE);
                         }
                     }
                 }else {
@@ -482,10 +516,16 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()) {
                     if (response.body().getResults() != null) {
                         articleListModels = response.body().getResults();
-                        for (ArticleListModel model : articleListModels){
-                            newsAdapter.add(model.getArticle());
+                        if (articleListModels.size() > 0){
+                            llNews.setVisibility(View.VISIBLE);
+                            for (ArticleListModel model : articleListModels){
+                                newsAdapter.add(model.getArticle());
+                            }
+                            initSwitcher();
+                        }else {
+                            llNews.setVisibility(View.GONE);
                         }
-                        initSwitcher();
+
                     }
                 }else{
                     handleFailure();
@@ -518,11 +558,17 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()) {
                     if (response.body().getResults() != null) {
                         featureArticleListModels = response.body().getResults();
-                        for (ArticleListModel model : featureArticleListModels){
-                            featureAdapter.add(model.getArticle());
+                        if (featureArticleListModels.size() > 0){
+                            llFeatures.setVisibility(View.VISIBLE);
+                            for (ArticleListModel model : featureArticleListModels){
+                                featureAdapter.add(model.getArticle());
+                            }
+                            infiniteAdapter = InfiniteScrollAdapter.wrap(featureAdapter);
+                            rvFeature.setAdapter(infiniteAdapter);
+                        }else {
+                            llFeatures.setVisibility(View.GONE);
                         }
-                        infiniteAdapter = InfiniteScrollAdapter.wrap(featureAdapter);
-                        rvFeature.setAdapter(infiniteAdapter);
+
                     }
                 }else{
                     handleFailure();
@@ -553,9 +599,12 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getResults().size() != 0){
+                            llHowTo.setVisibility(View.VISIBLE);
                             howToListModels = response.body().getResults();
                             initSwitcherHowTo();
                             setUpHowTo();
+                        }else {
+                            llHowTo.setVisibility(View.GONE);
                         }
                     }
                 }else{

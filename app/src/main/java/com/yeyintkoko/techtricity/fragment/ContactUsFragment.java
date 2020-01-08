@@ -122,7 +122,8 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
                 flipAnimation(ivGooglePlus,"https://aboutme.google.com/u/0/?referer=gplus");
                 break;
             case R.id.iv_facebook:
-                flipAnimation(ivFacebook,"https://www.facebook.com/techtricitymm/");
+                //flipAnimation(ivFacebook,"https://www.facebook.com/techtricitymm");
+                getOpenFacebookIntent(ivFacebook,"2127267900934650");
                 break;
             case R.id.iv_instagram:
                 flipAnimation(ivInstagram, "https://www.instagram.com/?hl=en");
@@ -213,6 +214,36 @@ public class ContactUsFragment extends Fragment implements View.OnClickListener 
                 startActivity(intent);
             }
         });
+    }
+
+    public void getOpenFacebookIntent(final ImageView view, String uri) {
+        final ObjectAnimator oa1 = ObjectAnimator.ofFloat(view, "scaleX", 1f, 0f);
+        final ObjectAnimator oa2 = ObjectAnimator.ofFloat(view, "scaleX", 0f, 1f);
+        oa1.setInterpolator(new DecelerateInterpolator());
+        oa2.setInterpolator(new AccelerateDecelerateInterpolator());
+        oa1.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                oa2.start();
+            }
+        });
+        oa1.start();
+        oa2.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                try {
+                    context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + uri));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"+ uri));
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     public void phoneCall(String phoneNo){

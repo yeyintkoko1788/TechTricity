@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "368350598289",
+    "firebase_url": "https://techtricity.firebaseio.com",
+    "project_id": "techtricity",
+    "storage_bucket": "techtricity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368350598289:android:dc4929b9d9acae02241b30",
+        "android_client_info": {
+          "package_name": "com.yeyintkoko.techtricity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368350598289-5lkootnpjibgiphkp5b7vl7npo5uhb8p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yeyintkoko.techtricity",
+            "certificate_hash": "086999d8285408c8174e8cf775ee4316a822e9fc"
+          }
+        },
+        {
+          "client_id": "368350598289-b9jf1mjs4f7orudrr9cmg9l2ccaqs14h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmIlBK7jkQOAQYT5hWgIvhu8JUydw1Rm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368350598289-b9jf1mjs4f7orudrr9cmg9l2ccaqs14h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

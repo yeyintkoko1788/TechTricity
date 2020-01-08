@@ -52,4 +52,10 @@
     <string name="author_detail">Author Detail</string>
     <string name="related_articles">Related Articles</string>
     <string name="error_msg">This field cannot be empty!</string>
+    <string name="android_application_sub_title">For the widespread of your business and comfort utilization, we can give an assortment of helpful android applications to conceal the entire business.</string>
+    <string name="creative_nweb_design">Creative\nWeb Design</string>
+    <string name="android_application">Android\nApplication</string>
+    <string name="creative_web_design_sub_title">We can provide a dynamic website with creative web design to boost your business beyond the edge of the digital universe and back.</string>
+    <string name="messenger_bot">Messenger\nBot</string>
+    <string name="messenger_bot_sub_title">Engage your customers with an intelligent chatbot. Help your curious customers’ questions with a smart bot.</string>
 </resources>

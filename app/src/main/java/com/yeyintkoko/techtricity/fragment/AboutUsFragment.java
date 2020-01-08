@@ -1,19 +1,25 @@
 package com.yeyintkoko.techtricity.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
@@ -52,6 +58,12 @@ public class AboutUsFragment extends Fragment {
     @BindView(R.id.iv_innovative_ads)
     ImageView ivInnovationAds;
 
+    @BindView(R.id.cv_chat_bot)
+    CardView cvChatBot;
+
+    @BindView(R.id.ll_chat_bot)
+    LinearLayout llChatBot;
+
     private Context context;
 
     @Nullable
@@ -65,24 +77,25 @@ public class AboutUsFragment extends Fragment {
     }
 
     private void init(){
-        /*final Animation anim = AnimationUtils.loadAnimation(context,R.anim.about_us_ani);
-        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        //resize item view of cinema list
+        Display display = ((Activity) cvChatBot.getContext()).getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        try {
+            display.getRealSize(size);
+        } catch (NoSuchMethodError err) {
+            display.getSize(size);
+        }
+        int width = size.x;
+        int height = size.y;
 
-                if (scrollY == ( (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight()) )) {
-                    ivContentCreation.clearAnimation();
-                    ivContentCreation.startAnimation(anim);
-                    ivContentPromotion.clearAnimation();
-                    ivContentPromotion.startAnimation(anim);
-                    ivVideoPresentation.clearAnimation();
-                    ivVideoPresentation.startAnimation(anim);
-                    ivInnovationAds.clearAnimation();
-                    ivInnovationAds.startAnimation(anim);
-                }
-            }
-        });
-        ivProvider.clearAnimation();
-        ivProvider.startAnimation(anim);*/
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams((int) (width/2.2),
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER;
+        lp.setMargins((int) convertDpToPx(context,8), (int) convertDpToPx(context,16), (int) convertDpToPx(context,8), (int) convertDpToPx(context,16));
+        cvChatBot.setLayoutParams(lp);
+    }
+
+    public float convertDpToPx(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
     }
 }

@@ -5,7 +5,7 @@
     <item>
         <shape>
             <solid
-                android:color="@color/colorAds"/>
+                android:color="@color/color_content_cration"/>
             <corners
                 android:radius="10dp"/>
         </shape>

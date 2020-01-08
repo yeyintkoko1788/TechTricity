@@ -206,4 +206,15 @@ public class MainActivity extends BaseActivity {
         }
         return null;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (CURRENT_TAG.equals(FRAGMENT_NEWS)){
+            super.onBackPressed();
+        }else {
+            displayView("News Feed", FRAGMENT_NEWS);
+            navigation.setSelectedItemId(R.id.navigation_news);
+        }
+
+    }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Card Slider</string>
+    <declare-styleable name="CardSlider">
+        <!-- Active card offset from start of RecyclerView. Default value is 50dp. -->
+        <attr format="dimension" name="activeCardLeftOffset"/>
+        <!-- Card width. Default value is 148dp. -->
+        <attr format="dimension" name="cardWidth"/>
+        <!-- Distance between cards. Default value is 12dp. -->
+        <attr format="dimension" name="cardsGap"/>
+        <!-- ViewUpdater implementation class. If not set, DefaultViewUpdater class is used. -->
+        <attr format="string" name="viewUpdater"/>
+    </declare-styleable>
+</resources>

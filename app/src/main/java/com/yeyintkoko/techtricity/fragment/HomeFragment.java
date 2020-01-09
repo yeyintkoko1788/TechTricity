@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     CircleIndicator2 indicator2;
 
     @BindView(R.id.rvNews)
-    RecyclerView rvNews;
+    DiscreteScrollView rvNews;
 
     @BindView(R.id.ts_Title)
     TextSwitcher tsTitle;
@@ -189,6 +189,7 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
     private int currentPosition;
     private MyDateFormat myDateFormat;
     private InfiniteScrollAdapter infiniteAdapter;
+    private InfiniteScrollAdapter infiniteAdapter1;
 
     private long pressTime = 0L;
     private long limit = 500L;
@@ -225,17 +226,24 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         bannerAdapter.registerAdapterDataObserver(indicator2.getAdapterDataObserver());
 
         rvNews.setHasFixedSize(true);
-        rvNews.setAdapter(newsAdapter);
-        rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rvNews.setOrientation(DSVOrientation.HORIZONTAL);
+        rvNews.addOnItemChangedListener((DiscreteScrollView.OnItemChangedListener<NewsAdapter.ViewHolder>) (viewHolder, i) -> {
+            onActiveCardChange(viewHolder.getItemPosition());
+        });
+        rvNews.setItemTransitionTimeMillis(300);
+        rvNews.setItemTransformer(new ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build());
+        /*rvNews.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     onActiveCardChange();
                 }
             }
-        });
+        });*/
 
-        //resize item view of news
+        /*//resize item view of news
         Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         try {
@@ -247,10 +255,10 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
         int height = size.y;
 
         int marginStart = (int) convertDpToPx(context,16f);
-        int cardsGap = (int) convertDpToPx(context,12f);
+        int cardsGap = (int) convertDpToPx(context,5f);
         layoutManger = new CardSliderLayoutManager(marginStart, (int)(width/1.3), cardsGap);
         rvNews.setLayoutManager(layoutManger);
-        new CardSnapHelper().attachToRecyclerView(rvNews);
+        new CardSnapHelper().attachToRecyclerView(rvNews);*/
 
         //feature news
         rvFeature.setHasFixedSize(true);
@@ -521,6 +529,8 @@ public class HomeFragment extends Fragment implements DiscreteScrollView.OnItemC
                             for (ArticleListModel model : articleListModels){
                                 newsAdapter.add(model.getArticle());
                             }
+                            infiniteAdapter1 = InfiniteScrollAdapter.wrap(newsAdapter);
+                            rvNews.setAdapter(infiniteAdapter1);
                             initSwitcher();
                         }else {
                             llNews.setVisibility(View.GONE);

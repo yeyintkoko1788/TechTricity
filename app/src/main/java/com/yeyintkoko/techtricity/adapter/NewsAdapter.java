@@ -1,11 +1,15 @@
 package com.yeyintkoko.techtricity.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +35,7 @@ public class NewsAdapter extends BaseAdapter {
 
     @Override
     protected void onBindCustomViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((NewsAdapter.ViewHolder) holder).bindPost((ArticleModel) getItemsList().get(position));
+        ((NewsAdapter.ViewHolder) holder).bindPost((ArticleModel) getItemsList().get(position), position);
     }
 
     @Override
@@ -53,6 +57,7 @@ public class NewsAdapter extends BaseAdapter {
         CardView cvItem;
 
         private Context context;
+        private int position;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -60,7 +65,23 @@ public class NewsAdapter extends BaseAdapter {
             ButterKnife.bind(this,itemView);
         }
 
-        public void bindPost(ArticleModel articleModel) {
+        public void bindPost(ArticleModel articleModel, int position) {
+            this.position = position;
+            //resize item view of cinema list
+            Display display = ((Activity) cvItem.getContext()).getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            try {
+                display.getRealSize(size);
+            } catch (NoSuchMethodError err) {
+                display.getSize(size);
+            }
+            int width = size.x;
+            int height = size.y;
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams((int) (width/1.3),
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+
+            cvItem.setLayoutParams(lp);
             Glide.with(context)
                     .asBitmap()
                     .load(articleModel.getArticlePhotoUrl())
@@ -69,6 +90,14 @@ public class NewsAdapter extends BaseAdapter {
                 Intent intent = NewsDetailActivity.getDetailIntent(context,articleModel.getID(),articleModel.getArticlePhotoUrl());
                 context.startActivity(intent);
             });
+        }
+
+        public int getItemPosition(){
+            return position;
+        }
+
+        public float convertDpToPx(Context context, float dp) {
+            return dp * context.getResources().getDisplayMetrics().density;
         }
     }
 }

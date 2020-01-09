@@ -61,14 +61,11 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.yarolegovich.discretescrollview.DiscreteScrollView
                     android:id="@+id/rvNews"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/potrait_square_medium"
                     android:layout_marginBottom="@dimen/margin_normal"
-                    android:clipChildren="true"
-                    android:overScrollMode="never"
-                    app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
                     />
 
                 <TextSwitcher
